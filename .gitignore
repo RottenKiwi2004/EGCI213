@@ -39,3 +39,6 @@ build/
 
 ### Ignoring zip file for assignment submission ###
 *.zip
+
+### Ignoring pdf file (Course document) ###
+*.pdf
