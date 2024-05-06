@@ -1,0 +1,15 @@
+Bangkok       1564
+Buriram      10080
+Chaiyaphum   12698
+Chonburi      4508
+Lampang      12488
+Lopburi       6493
+Kanchanaburi 19385
+Nonthaburi     637
+Phetchabun   12340
+Phitsanulok  10589
+Phuket         574
+Ranong        3666
+Sisaket       8936
+Trang         4726
+Yala          4476

@@ -1,0 +1,18 @@
+Province                  Square km         Square mile            Ratio to your city
+=====================================================================================
+Your city                     3,666            1,415.45                          1.00
+Bangkok                       1,564              603.86                          0.43
+Buriram                      10,080            3,891.91                          2.75
+Chaiyaphum                   12,698            4,902.72                          3.46
+Chonburi                      4,508            1,740.55                          1.23
+Lampang                      12,488            4,821.64                          3.41
+Lopburi                       6,493            2,506.96                          1.77
+Kanchanaburi                 19,385            7,484.59                          5.29
+Nonthaburi                      637              245.95                          0.17
+Phetchabun                   12,340            4,764.50                          3.37
+Phitsanulok                  10,589            4,088.43                          2.89
+Phuket                          574              221.62                          0.16
+Ranong                        3,666            1,415.45                          1.00
+Sisaket                       8,936            3,450.21                          2.44
+Trang                         4,726            1,824.72                          1.29
+Yala                          4,476            1,728.19                          1.22
