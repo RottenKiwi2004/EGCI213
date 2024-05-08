@@ -53,7 +53,8 @@ class w3_1_Array
         
         // colon-case requires break to prevent fall-through to the next case
         // one colon-case for each case
-        switch(test)
+        /*
+		switch(test)
         {
             case "Saturday": case "Sunday":
                 System.out.printf("\n%s is weekend \n", test);
@@ -61,16 +62,19 @@ class w3_1_Array
             default:
                 System.out.printf("\n%s is weekday \n", test);
         }
+        */
         
-        
-        /*
+
         // arrow-case doesn't require break at the end
         // cases on RHS are separated by comma, LHS = an instruction or a block of code
         switch(test)
         {
             case "Saturday", "Sunday" -> System.out.printf("\n%s is weekend \n", test); 
-            default                   -> System.out.printf("\n%s is weekday \n", test);
+            default                   -> {
+				System.out.printf("\n%s is weekday \n", test);
+				System.out.println("Test");
+			}
         }
-        */
+
     }
 }

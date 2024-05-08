@@ -1,13 +1,13 @@
 package Ex1_6481322;
 
-import java.util.*;
+//import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) {
 
         int n;
-        Scanner scanner = new Scanner(System.in);
+        java.util.Scanner scanner = new java.util.Scanner(System.in);
         do {
             System.out.println("Enter integer x (2-1000) = ");
             n = scanner.nextInt();
