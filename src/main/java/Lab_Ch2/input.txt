@@ -1,0 +1,5 @@
+Annie  1.70  19
+Betty  1.55  25
+Carol  1.72  20
+Diana  1.58  16
+Erica  1.65  22
