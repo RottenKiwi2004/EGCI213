@@ -1,0 +1,13 @@
+m, Abu Dhabi GP,   Yas Marina Circuit,   2009, 5.281, 1:26.993
+h, American Derby, Arlington Park,         97, 8.5
+m, Australian GP,  Albert Park Circuit,  1953, 5.278, 1:19.813
+m, Austrian GP,    Red Bull Ring,        1969, 4.318, 1:07.312
+m, British GP,     Silverstone Circuit,  1948, 5.891, 1:30.275
+m, Dutch GP,       Circuit Zandvoort,    1948, 4.259, 1:13.837
+h, Epsom Derby,    Epsom Downs,           363, 12.05
+h, French Derby,   Chantilly Racecourse,  190, 10.44
+h, German Derby,   Horner Rennbahn,       169, 12
+m, Hungarian GP,   Hungaroring,          1986, 4.381, 1:20.504
+m, Japanese GP,    Suzuka Circuit,       1962, 5.807, 1:33.706
+h, Kentucky Derby, Churchill Downs,       149, 10
+m, Sao Paulo GP,   Interlagos Circuit,   1940, 4.309, 1:12.486
