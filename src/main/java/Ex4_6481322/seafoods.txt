@@ -1,0 +1,29 @@
+Type, Seafood (3 oz), Omega-3 (mg), Cholesterol (mg), Mercury (ppm)
+m, Abalone,              100,  70, 0.009
+c, Blue crab,            400,  80, 0.065
+f, Bluefish,             800,  60, 0.368
+f, Catfish,              300,  50, 0.024
+m, Clams,                200,  60, 0.006
+f, Cod,                  100,  50, 0.111
+m, Cuttlefish,           100, 100, 0.024
+f, Flounder,             400,  50, 0.056
+f, Haddock,              200,  60, 0.055
+f, Halibut,              400,  30, 0.241
+f, Herring,             1700,  60, 0.078
+c, Lobster,              100, 100, 0.093
+f, Mackerel (Atlantic), 1000,  60, 0.050
+f, Mackerel (Pacific),  1600,  60, 0.088
+f, Ocean Perch,          300,  50, 0.024
+m, Oysters,              700,  90, 0.012
+f, Pollock,              500,  80, 0.031
+f, Rainbow Trout,        600,  60, 0.071
+f, Salmon (Atlantic),   1600,  50, 0.022
+f, Salmon (Coho),        900,  50, 0.022
+f, Sea Bass,             600,  60, 0.167  
+m, Scallops,             200,  60, 0.006
+c, Shrimp,               300, 160, 0.009
+m, Squid,                500, 220, 0.024
+f, Swordfish,            700,  40, 0.995
+f, Whiting,              700,  70, 0.051
+f, Tilefish,             800,  40, 0.144
+f, Tuna (Yellowfin),     200,  50, 0.354
