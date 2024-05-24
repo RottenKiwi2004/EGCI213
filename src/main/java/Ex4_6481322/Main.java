@@ -118,6 +118,7 @@ public class Main {
             while (true) {
                 System.out.println("Choose filter --> a = all, f = fish, c = crustacean, m = mollusk, others = quit");
                 String selected = scanner.nextLine();
+                selected = selected.toLowerCase();
                 switch(selected.charAt(0)) {
                     case 'm': case 'c': case 'f': case 'a': break;
                     default: return;
