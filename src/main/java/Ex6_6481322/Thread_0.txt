@@ -1,0 +1,14 @@
+Thread_0, target = 600
+Round   1 >>   25  +31   40   77  +89        total prime =  120
+Round   2 >>   36   36   69   74   93        total prime =  120
+Round   3 >>  +61  +61   87   94   98        total prime =  242
+Round   4 >>   22   30   56   94   99        total prime =  242
+Round   5 >>   +3    8  +23   44   85        total prime =  268
+Round   6 >>   38   39   48   72  +97        total prime =  365
+Round   7 >>    9  +13  +41   57   82        total prime =  419
+Round   8 >>   22   27  +41   51   98        total prime =  460
+Round   9 >>    8   24   52   78   96        total prime =  460
+Round  10 >>   +2   45   55  +71   86        total prime =  533
+Round  11 >>  +11   16  +17   18   70        total prime =  561
+Round  12 >>    6  +37   48   68   75        total prime =  598
+Round  13 >>   20  +29   57  +59   77        total prime =  686
