@@ -56,38 +56,46 @@ class MainApplication extends JFrame implements KeyListener
         contentpane.add( petLabels[1] );
 
         addKeyListener(this);
+        addMouseMotionListener(wingLabel);
+        addMouseListener(wingLabel);
 
         setDog();
 	    repaint();
     }
 
-
     @Override
-    public void keyTyped( KeyEvent e ) {
-    }
+    public void keyTyped( KeyEvent e ) { }
     @Override
     public void keyPressed( KeyEvent e ) {
-        System.out.printf("KeyChar : [%c]", e.getKeyChar());
-        switch(e.getKeyChar()) {
-            case 'd':
-            case 'D':
-                setDog(); break;
-            case 'c':
-            case 'C':
-                setCat(); break;
-            case 'j':
-            case 'J':
-                jump(); break;
+//        System.out.printf("KeyChar : [%3d]\n", e.getKeyCode());
+        switch(e.getKeyCode()) {
+            case 27: if (!activeLabel.verticalMove) break;
+                     activeLabel.setWingStatus(false);
+                     wingLabel.setVisible(true);
+                     wingLabel.curX = activeLabel.getX();
+                     wingLabel.curY = MyConstants.SKY_Y;
+                     wingLabel.updateLocation();
+                     break;
+            case 37: activeLabel.moveLeft();    break;
+            case 38: activeLabel.moveUp();      break;
+            case 39: activeLabel.moveRight();   break;
+            case 40: activeLabel.moveDown();    break;
+            // C
+            case 67: setCat(); break;
+            // D
+            case 68: setDog(); break;
+            // J
+            case 74: jump(); break;
         }
+        repaint();
     }
-
     @Override
     public void keyReleased(KeyEvent e) { }
 
-    public CharacterLabel getActiveLabel()  { return activeLabel; }    
-    public void setDog()                    { activeLabel = petLabels[0]; setTitle("Dog is active"); }
-    public void setCat()                    { activeLabel = petLabels[1]; setTitle("Cat is active"); }
-    public void jump  ()                    { }
+    public CharacterLabel getActiveLabel()  { return activeLabel; }
+    public void setDog() { activeLabel = petLabels[0]; setTitle("Dog is active"); }
+    public void setCat() { activeLabel = petLabels[1]; setTitle("Cat is active"); }
+    public void jump  () { activeLabel.jump(); }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -126,13 +134,16 @@ abstract class BaseLabel extends JLabel
         curX = x; curY = y; 
         setBounds(curX, curY, width, height);
         setMoveConditions(hm, vm);
-    } 
+    }
+    protected int putValueInBound(int lowerBound, int value, int upperBound) {
+        return Math.max(lowerBound, Math.min(value, upperBound));
+    }
     
     abstract public void updateLocation(); 
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-class CharacterLabel extends BaseLabel 
+class CharacterLabel extends BaseLabel
 {
     public CharacterLabel(String file1, String file2, int w, int h, MainApplication pf)				
     { 
@@ -140,31 +151,107 @@ class CharacterLabel extends BaseLabel
         super(file1, file2, w, h, pf);
     }
     
-    public void updateLocation()    { }    
-    public void moveUp()            { }
-    public void moveDown()          { }
-    public void moveLeft()          { }
-    public void moveRight()         { }
-    public void jump()              { }
+    public void updateLocation()    { this.setLocation(this.curX, this.curY); }
+    public void moveUp()            {
+        if (!this.verticalMove) return;
+        this.curY = this.putValueInBound(0, this.curY - 10, MyConstants.FRAMEHEIGHT - this.getHeight());
+        this.updateLocation();
+    }
+    public void moveDown()          {
+        if (!this.verticalMove) return;
+        this.curY = this.putValueInBound(0, this.curY + 10, MyConstants.FRAMEHEIGHT - this.getHeight());
+        this.updateLocation();
+    }
+    public void moveLeft()          {
+        if (!this.horizontalMove) return;
+//        System.out.println("moveLeft");
+        this.curX = (this.curX + MyConstants.FRAMEWIDTH - 10 + this.getWidth() / 2) % MyConstants.FRAMEWIDTH - this.getWidth() / 2;
+        this.updateLocation();
+    }
+    public void moveRight()         {
+        if (!this.horizontalMove) return;
+        this.curX = (this.curX + 10 + this.getWidth() / 2) % MyConstants.FRAMEWIDTH - this.getWidth() / 2;
+        this.updateLocation();
+    }
+    public void jump()              {
+        if (this.verticalMove) return;
+        this.curX = this.curX <= MyConstants.BRIDGE_LEFT - this.getWidth() ? MyConstants.BRIDGE_RIGHT :
+                    this.curX >= MyConstants.BRIDGE_RIGHT ? MyConstants.BRIDGE_LEFT - this.getWidth() :
+                    this.curX;
+        this.updateLocation();
+    }
+    public void setWingStatus(boolean status) {
+        this.verticalMove = status;
+        setIcon(status ? this.iconAlt : this.iconMain);
+        this.curY = MyConstants.GROUND_Y;
+        updateLocation();
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-class ItemLabel extends BaseLabel implements MouseMotionListener
+class ItemLabel extends BaseLabel implements MouseMotionListener, MouseListener
 {
+
+    private boolean isDragging = false;
+    private int startDragX, startDragY;
+    private int startMouseX, startMouseY;
+    private int dragOffsetX, dragOffsetY;
+
     public ItemLabel(String file, int w, int h, MainApplication pf)				
     { 
         // Alternative icon = null
         super(file, w, h, pf);
     }   
 
-    public void updateLocation()    { }
+    public void updateLocation()    { this.setLocation(this.curX, this.curY); }
     public void setMainIcon()       { setIcon(iconMain); }    
     public void setAltIcon()        { setIcon(iconAlt); }
+
+    @Override
     public void mouseDragged(MouseEvent e) {
-        //
+//        System.out.printf("MouseDragged [%d, %d]\n", e.getX(), e.getY());
+        if (!isDragging) return;
+        dragOffsetX = e.getX() - startMouseX; dragOffsetY = e.getY() - startMouseY;
+        curX = startDragX + dragOffsetX; curY = startDragY + dragOffsetY;
+        curX = putValueInBound(0, curX, MyConstants.FRAMEWIDTH - this.getWidth());
+        curY = putValueInBound(0, curY, MyConstants.FRAMEHEIGHT - this.getHeight() - 30);
+        this.updateLocation();
+
+        CharacterLabel activeLabel = parentFrame.getActiveLabel();
+        if (this.getBounds().intersects(activeLabel.getBounds())) {
+            activeLabel.setWingStatus(true);
+            this.setVisible(false);
+        }
     }
 
-    public void mouseMoved(MouseEvent e) {
+    @Override
+    public void mouseMoved(MouseEvent e)    { }
+    @Override
+    public void mouseClicked(MouseEvent e)  { }
+    @Override
+    public void mousePressed(MouseEvent e)  {
+        System.out.printf("Wing       [%d, %d]\n", this.getX(), this.getY());
+        System.out.printf("MouseDown  [%d, %d]\n", e.getX(), e.getY());
+        System.out.printf("Wing Bound [%d, %d]\n\n\n", this.getX() + this.getWidth(), this.getY() + this.getHeight());
+        // Check if started dragging inside the wing
+        if (!isPointInBound(e.getX(), e.getY())) return;
+        isDragging = true;
+        startDragX = this.getX(); startDragY = this.getY();
+        startMouseX = e.getX(); startMouseY = e.getY();
+    }
+    @Override
+    public void mouseReleased(MouseEvent e) { isDragging = false;}
+    @Override
+    public void mouseEntered(MouseEvent e)  { }
+    @Override
+    public void mouseExited(MouseEvent e)   { }
 
+    private boolean isPointInBound(int x, int y) {
+        // Windows offset
+        x -= 8;
+        y -= 30;
+
+        return this.getX() < x && x < this.getX() + this.getWidth()
+                && this.getY() < y && y < this.getY() + this.getHeight();
     }
 }
